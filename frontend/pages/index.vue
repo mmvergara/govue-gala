@@ -1,10 +1,9 @@
 <template>
-  <header>
-    <nav>
-      <ul>
-        <li><NuxtLink to="/post/create">Post - Creat</NuxtLink></li>
-        <li><NuxtLink to="/auth">Auth</NuxtLink></li>
-      </ul>
-    </nav>
-  </header>
+  <main>
+    <PostItem />
+  </main>
 </template>
+
+<script setup lang="ts">
+import PostItem from "@/components/post-item.vue";
+</script>
