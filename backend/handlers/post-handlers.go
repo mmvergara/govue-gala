@@ -41,7 +41,7 @@ func (p *Post) Create(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Printf("Post: %+v\n", post)
 
-	if err := p.Repo.Insert(r.Context(), post); err != nil {
+	if err := p.Repo.Create(r.Context(), post); err != nil {
 		fmt.Println("Error inserting post", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return

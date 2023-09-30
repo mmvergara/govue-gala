@@ -13,17 +13,18 @@ import (
 
 
 
-type User struct {
+type Auth struct {
 	Repo *user.RedisRepo
 }
 
 
-func (u *User) Create(w http.ResponseWriter, r *http.Request) {
+func (u *Auth) Create(w http.ResponseWriter, r *http.Request) {
 	
 	// Create a struct to hold the request body
 	var body struct {
 		Username string `json:"username"`
 		Password string `json:"password"`
+		Age int `json:"age"`
 	}
 
 	// Decode the request body into the struct
@@ -45,11 +46,12 @@ func (u *User) Create(w http.ResponseWriter, r *http.Request) {
 	user := model.User{
 		UserID:   uuid.Must(uuid.NewRandom()),
 		Username: body.Username,
+		Age:body.Age,
 		Password: hashedPassword,
 	}
 
 	// Insert the user into the database
-	if err := u.Repo.Insert(r.Context(), user); err != nil {
+	if err := u.Repo.CreateUser(r.Context(), user); err != nil {
 		fmt.Println("Error inserting user", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return

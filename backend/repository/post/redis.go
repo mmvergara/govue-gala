@@ -19,7 +19,7 @@ func postIDKey(id uuid.UUID) string {
 	return fmt.Sprintf("post:%s", id)
 }
 
-func (r *RedisRepo) Insert(ctx context.Context, post model.Post) error {
+func (r *RedisRepo) Create(ctx context.Context, post model.Post) error {
 	// convert post to json
 	postJson, err := json.Marshal(post)
 	if err != nil {
