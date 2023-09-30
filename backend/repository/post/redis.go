@@ -142,12 +142,11 @@ func (r *RedisRepo) FindAll(ctx context.Context, page FindAllPage) (FindResult, 
 	}
 
 	xs, err := r.Client.MGet(ctx, keys...).Result()
-
+	fmt.Println("xs", xs)
 	if len(keys) == 0 {
 		return FindResult{
 			Posts: []model.Post{},
 		}, nil
-
 	}
 
 	if err != nil {
@@ -157,6 +156,7 @@ func (r *RedisRepo) FindAll(ctx context.Context, page FindAllPage) (FindResult, 
 	posts := make([]model.Post, len(xs))
 
 	for i, x := range xs {
+		fmt.Println("x", x)
 		x := x.(string)
 
 		var post model.Post

@@ -29,7 +29,7 @@ func New() *App {
 
 func (a *App) Start(ctx context.Context) error {
 	server := &http.Server{
-		Addr:    "localhost:3000",
+		Addr:    "localhost:8080",
 		Handler: a.router,
 	}
 
