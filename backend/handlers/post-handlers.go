@@ -47,20 +47,19 @@ func (p *Post) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res, err := json.Marshal(post)
-	if err != nil {
-		fmt.Println("Error marshalling post", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		return
-	}
+	// res, err := json.Marshal(post)
+	// if err != nil {
+	// 	fmt.Println("Error marshalling post", err)
+	// 	w.WriteHeader(http.StatusInternalServerError)
+	// 	return
+	// }
 
 	w.WriteHeader(http.StatusCreated)
-	w.Write(res)
+	// w.Write(res)
 
 }
 
 func (p *Post) List(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("LIST POST +======= 1")
 	cursor := r.URL.Query().Get("cursor")
 	if cursor == "" {
 		cursor = "0"
@@ -75,8 +74,7 @@ func (p *Post) List(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	fmt.Println("LIST POST +======= 2")
-
+	
 	const size = 1
 
 	res, err := p.Repo.FindAll(r.Context(), post.FindAllPage{
@@ -88,9 +86,7 @@ func (p *Post) List(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Error getting posts", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
-	}
-
-	fmt.Println("LIST POST +======= 3")
+	}	
 
 	var response struct {
 		Posts      []model.Post `json:"posts"`
@@ -101,14 +97,12 @@ func (p *Post) List(w http.ResponseWriter, r *http.Request) {
 	response.NextCursor = res.Cursor
 
 	resJSON, err := json.Marshal(response)
-	fmt.Println("LIST POST +======= 4")
 
 	if err != nil {
 		fmt.Println("Error marshalling posts", err)
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-	fmt.Println("LIST POST +======= 61")
 
 
 	w.WriteHeader(http.StatusOK)

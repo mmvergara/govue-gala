@@ -1,6 +1,11 @@
 <template>
   <section>
-    <h1>Post</h1>
-    
+    <h2>{{ post.post_title }}</h2>
+    <p>{{ post.post_description }}</p>
   </section>
 </template>
+
+<script setup lang="ts">
+import { PostType } from "~/types/post-types";
+const { post } = defineProps<{ post: PostType }>();
+</script>

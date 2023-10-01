@@ -35,13 +35,25 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-
+import { postRequest } from "~/lib/fetching";
+const router = useRouter();
 const postTitle = ref("");
 const postDescription = ref("");
 
-const submitPost = (e: Event) => {
+const submitPost = async (e: Event) => {
   e.preventDefault();
-  console.log(postTitle.value);
-  console.log(postDescription.value);
+  const { error } = await postRequest("/post", {
+    author_id: "43637313-4e92-4666-8174-366226658cfe",
+    post_title: postTitle.value,
+    post_description: postDescription.value,
+  });
+  if (error) {
+    useNuxtApp().$toast.error("Post created successfully!");
+    return;
+  }
+  useNuxtApp().$toast.success("Post created successfully!");
+  setTimeout(() => {
+    router.push("/");
+  }, 2000);
 };
 </script>

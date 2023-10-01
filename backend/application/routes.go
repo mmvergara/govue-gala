@@ -69,5 +69,5 @@ func (app *App) loadUserRoutes(router chi.Router) {
 	}
 
 	router.Get("/{id}", userHandler.GetByID)
-	router.Delete("/{id}", userHandler.DeleteByID)
+	// router.Delete("/{id}", userHandler.DeleteByID)
 }
