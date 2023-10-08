@@ -11,10 +11,11 @@ const MAIN_URL = "http://localhost:8080";
 export const getRequest = async <T>(
   url: string
 ): Promise<ParsedResponse<T>> => {
+  console.log("Getting data");
   try {
-    const res = await fetch(`${MAIN_URL}${url}`);
-    const data = (await res.json()) as T;
-    return { data: data, error: null };
+    const res: T = await $fetch(`${MAIN_URL}${url}`);
+    
+    return { data: res, error: null };
   } catch (e) {
     return { data: null, error: "Failed to fetch data" };
   }

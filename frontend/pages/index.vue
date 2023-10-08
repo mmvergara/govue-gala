@@ -1,13 +1,27 @@
+<script setup lang="ts">
+let err = "";
+const { data, pending, error } = await useFetch<{ posts: any }>(
+  `http://localhost:8080/post`,
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    cache: "no-cache",
+  }
+);
+if (pending.value) {
+  err = "Loading...";
+} else if (error.value) {
+  console.log(error.value);
+} else {
+  err = "";
+}
+</script>
+
 <template>
   <main>
-    <p v-show="!!error">{{ error }}</p>
+    <p v-show="err">{{ err }}</p>
     <PostItem v-for="post in data?.posts" :post="post" :key="post.created_at" />
   </main>
 </template>
-
-<script setup lang="ts">
-import PostItem from "@/components/post-item.vue";
-import type { PostType } from "@/types/post-types";
-import { getRequest } from "~/lib/fetching";
-const { data, error } = await getRequest<{ posts: PostType[] }>("/post");
-</script>
