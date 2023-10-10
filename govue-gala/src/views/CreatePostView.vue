@@ -16,12 +16,12 @@
           class="bg-retroCream p-2 rounded-sm w-full mb-4"
         />
         <label for="postDescription" class="w-full">Post Description</label>
-        <input
+        <textarea
           v-model="postDescription"
           type="text"
           id="postDescription"
           class="bg-retroCream p-4 rounded-sm w-full mb-6"
-        />
+        ></textarea>
         <button
           type="submit"
           class="bg-retroPurplePink p-4 rounded-sm text-white flex-auto w-full"
