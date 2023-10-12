@@ -8,7 +8,6 @@ import (
 	"github.com/go-chi/cors"
 	"github.com/mmvergara/golang-gala/backend/handlers"
 	"github.com/mmvergara/golang-gala/backend/repository/post"
-	"github.com/mmvergara/golang-gala/backend/repository/user"
 )
 
 func (app *App) loadRoutes() {
@@ -47,27 +46,4 @@ func (app *App) loadPostRoutes(router chi.Router) {
 	router.Get("/", postHandler.List)
 	router.Get("/{id}", postHandler.GetByID)
 	router.Delete("/{id}", postHandler.DeleteByID)
-}
-
-func (app *App) loadAuthRoutes(router chi.Router) {
-	authHandler := &handlers.Auth{
-		Repo: &user.RedisRepo{
-			Client: app.redisDb,
-		},
-	}
-
-	// router.Post("/login", authHandler.)
-	router.Post("/register", authHandler.Create)
-
-}
-
-func (app *App) loadUserRoutes(router chi.Router) {
-	userHandler := &handlers.User{
-		Repo: &user.RedisRepo{
-			Client: app.redisDb,
-		},
-	}
-
-	router.Get("/{id}", userHandler.GetByID)
-	// router.Delete("/{id}", userHandler.DeleteByID)
 }

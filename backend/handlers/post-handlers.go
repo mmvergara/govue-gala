@@ -20,7 +20,6 @@ type Post struct {
 
 func (p *Post) Create(w http.ResponseWriter, r *http.Request) {
 	var body struct {
-		AuthorID        uuid.UUID `json:"author_id"`
 		PostTitle       string    `json:"post_title"`
 		PostDescription string    `json:"post_description"`
 	}
@@ -34,7 +33,6 @@ func (p *Post) Create(w http.ResponseWriter, r *http.Request) {
 	now := time.Now().UTC()
 	post := model.Post{
 		PostID:          uuid.Must(uuid.NewRandom()),
-		AuthorID:        body.AuthorID,
 		PostTitle:       body.PostTitle,
 		PostDescription: body.PostDescription,
 		CreatedAt:       &now,
@@ -47,15 +45,7 @@ func (p *Post) Create(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// res, err := json.Marshal(post)
-	// if err != nil {
-	// 	fmt.Println("Error marshalling post", err)
-	// 	w.WriteHeader(http.StatusInternalServerError)
-	// 	return
-	// }
-
 	w.WriteHeader(http.StatusCreated)
-	// w.Write(res)
 
 }
 

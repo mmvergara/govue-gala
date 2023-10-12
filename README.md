@@ -1,4 +1,8 @@
-# Golang-Gala
+# Govue-Gala
 
-- Backend - Go Lang
-- Frondend - NuxtJS
+- Backend 
+    - Go Lang 
+    - Go Lang Chi
+    - Redis
+- Frontend 
+    - Vue JS

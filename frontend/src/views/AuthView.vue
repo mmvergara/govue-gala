@@ -11,7 +11,7 @@
       class="flex flex-col justify-center items-center"
     >
       <div
-        class="flex flex-col justify-center items-center gap-1 border-2 p-6 border-retroPurple rounded-sm w-full max-w-[500px]"
+        class="flex flex-col justify-center items-center gap-1 border-t-2 border-b-2 p-6 border-retroPurple rounded-sm w-full max-w-[500px]"
       >
         <label for="authUsername" class="w-full">Username</label>
         <input

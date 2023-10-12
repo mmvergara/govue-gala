@@ -6,7 +6,7 @@
       class="flex flex-col justify-center items-center"
     >
       <div
-        class="flex flex-col justify-center items-center gap-1 border-2 p-6 border-retroPurple rounded-sm w-full max-w-[500px]"
+        class="flex flex-col justify-center items-center gap-1 border-t-2 border-b-2 p-6 border-retroPurple rounded-sm w-full max-w-[500px]"
       >
         <label for="postTitle" class="w-full">Post Title</label>
         <input
@@ -24,22 +24,38 @@
         ></textarea>
         <button
           type="submit"
-          class="bg-retroPurplePink p-4 rounded-sm text-white flex-auto w-full"
+          class="bg-retroPurplePink p-4 text-white flex-auto w-full rounded-md"
         >
           Create Post
         </button>
+        <p class="text-red-500">{{ err }}</p>
       </div>
     </form>
   </main>
 </template>
 
 <script setup lang="ts">
+import { AxiosPost } from "@/components/AxiosInstance";
 import { ref } from "vue";
 const postTitle = ref("");
 const postDescription = ref("");
+const err = ref("");
 
 const submitPost = async (e: Event) => {
   e.preventDefault();
-  console.log("submitPost");
+
+  const { error } = await AxiosPost("/post", {
+    author_id: "fa025492-9e1b-4d7e-8af6-5a7b2a16d359",
+    post_title: postTitle.value,
+    post_description: postDescription.value,
+  });
+
+  if (error) {
+    err.value = error;
+  } else {
+    err.value = "";
+    postTitle.value = "";
+    postDescription.value = "";
+  }
 };
 </script>
