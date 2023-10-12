@@ -4,7 +4,7 @@ import { RouterLink } from "vue-router";
 
 <template>
   <nav class="flex bg-retroPurple gap-2 text-white p-2">
-    <RouterLink to="/" class="mr-auto nav-link">Golang Gala</RouterLink>
+    <RouterLink to="/" class="mr-auto nav-link">Govue Gala</RouterLink>
     <RouterLink to="/create/post" class="nav-link">Create Post</RouterLink>
   </nav>
 </template>

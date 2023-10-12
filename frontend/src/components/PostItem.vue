@@ -1,16 +1,16 @@
 <template>
   <section
-    class="bg-white p-2 border-t-[purple] border-t-4 w-full max-w-[500px]"
+    class="bg-white p-4 border-[purple] border-t-2 drop-shadow-md rounded-md w-full max-w-[500px]"
   >
-    <h2>
+    <h2 class="font-semibold text-lg">
       {{ post.post_title }}
     </h2>
     <p>{{ post.post_description }}</p>
-    <span class="opacity-50 ml-auto text-xs">{{ time }}</span>
-    <br />
-    <div class="flex">
+    <div class="w-[99%] border-b-[1px] mx-auto my-4"></div>
+    <div class="flex justify-between items-center">
+      <span class="opacity-50 text-xs">{{ time }}</span>
       <button
-        class="ml-auto bg-white border-2 hover:bg-slate-300 text-sm p-2 rounded-sm"
+        class="bg-white border-2 hover:bg-slate-300 text-sm p-2 rounded-sm"
         @click="handleDelete"
       >
         ❌

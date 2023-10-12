@@ -12,7 +12,6 @@ const getPosts = async () => {
 };
 
 const removePost = async (id: string) => {
-  console.log("yoyo")
   await AxiosRequest(`/post/${id}`, "DELETE");
   posts.value = posts.value?.filter((post) => post.post_id !== id) || null;
 };
@@ -21,7 +20,7 @@ getPosts();
 
 <template>
   <main>
-    <h1 class="text-center py-8 text-[50px]">Welcome to Govue Gala</h1>
+    <h1 class="text-center py-8 text-[50px]">Govue Gala</h1>
     <section class="flex justify-center items-center flex-col gap-4">
       <PostItem
         v-for="post in posts"
