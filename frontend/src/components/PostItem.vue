@@ -7,13 +7,29 @@
     </h2>
     <p>{{ post.post_description }}</p>
     <span class="opacity-50 ml-auto text-xs">{{ time }}</span>
+    <br />
+    <div class="flex">
+      <button
+        class="ml-auto bg-white border-2 hover:bg-slate-300 text-sm p-2 rounded-sm"
+        @click="handleDelete"
+      >
+        ❌
+      </button>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
 import { defineProps } from "vue";
 import type { PostType } from "../types/post-types";
-const { post } = defineProps<{ post: PostType }>();
+const { post, removePost } = defineProps<{
+  post: PostType;
+  removePost: (id: string) => void;
+}>();
+
+const handleDelete = () => {
+  removePost(post.post_id);
+};
 
 const timeFromNow = (date: string) => {
   const time = new Date(date);

@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, type AxiosResponse } from "axios";
 // Initialize Axios Instance
 axios.defaults.withCredentials = true;
 const AxiosInstance = axios.create({
@@ -11,25 +11,26 @@ type ApiRes<T> = {
   error: string;
 };
 
-export const AxiosGet = async <T>(url: string): Promise<ApiRes<T>> => {
-  try {
-    const res = await AxiosInstance.get<ApiRes<T>>(url);
-    return { data: res.data, error: "" };
-  } catch (err) {
-    const AxiosError = err as AxiosError;
-    return { data: null as T, error: AxiosError.message };
-  }
-};
-
-export const AxiosPost = async <T>(
+export const AxiosRequest = async <T>(
   url: string,
-  body: any
+  method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
+  body?: any
 ): Promise<ApiRes<T>> => {
   try {
-    const res = await AxiosInstance.post<ApiRes<T>>(url, body);
-    return { data: res.data.data!, error: "" };
-  } catch (err) {
-    const AxiosError = err as AxiosError;
+    let res: AxiosResponse<T> | null = null;
+    if (method === "GET") {
+      res = await AxiosInstance.get<T>(url);
+    } else if (method === "POST") {
+      res = await AxiosInstance.post<T>(url, body);
+    } else if (method === "PUT") {
+      res = await AxiosInstance.put<T>(url, body);
+    } else if (method === "DELETE") {
+      res = await AxiosInstance.delete<T>(url);
+    }
+    if (!res) throw new Error("AxiosResponse is null");
+    return { data: res.data, error: "" };
+  } catch (error) {
+    const AxiosError = error as AxiosError;
     return { data: null as T, error: AxiosError.message };
   }
 };
