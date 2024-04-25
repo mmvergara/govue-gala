@@ -10,19 +10,18 @@ import (
 	"github.com/mmvergara/golang-gala/backend/application"
 )
 
-func main(){
+func main() {
 	godotenv.Load(".env")
 
 	app := application.New()
 
-	ctx, cancel := signal.NotifyContext(context.Background(),os.Interrupt)
+	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer cancel()
-
 
 	err := app.Start(ctx)
 
 	if err != nil {
 		fmt.Println("Failed to start app:", err)
 	}
-	
+
 }
